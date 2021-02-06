@@ -8,6 +8,18 @@ body {
 	font-family: 'Poppins', sans-serif;
 }
 
+body::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+body::-webkit-scrollbar-track {
+	background-color: #fff;
+}
+
+body::-webkit-scrollbar-thumb {
+	background-color: #000;
+}
+
 header,
 .more-btn-container {
 	display: flex;
@@ -25,6 +37,7 @@ header h1 {
 	color: rgb(38, 35, 71);
 	font-size: 3rem;
 }
+
 .search-form {
 	display: flex;
 	padding: 1rem 1rem 3rem;
@@ -70,6 +83,7 @@ header h1 {
 	font-size: 1.2rem;
 	padding: 1rem 1.5rem;
 	border-radius: 0.5rem;
+	margin: 4rem 0 2rem;
 }
 
 .gallery {
@@ -99,7 +113,21 @@ header h1 {
 	object-fit: cover;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 480px) {
+	header,
+	main {
+		width: 95%;
+		margin: 0 auto;
+	}
+	.search-form {
+		padding: 1rem;
+	}
+
+	.search-input {
+		font-size: 1rem;
+		width: 90%;
+	}
+
 	.gallery {
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		grid-gap: 4rem;
