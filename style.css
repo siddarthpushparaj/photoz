@@ -71,3 +71,39 @@ header h1 {
 	padding: 1rem 1.5rem;
 	border-radius: 0.5rem;
 }
+
+.gallery {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	grid-gap: 3rem;
+	width: 90%;
+	margin: auto;
+	padding: 2rem;
+}
+
+.photo-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.5rem 0rem;
+	color: gray;
+}
+
+.photo-info a {
+	color: gray;
+}
+
+.gallery-img img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+@media (max-width: 420px) {
+	.gallery {
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-gap: 4rem;
+		width: 97%;
+		margin: 0 auto;
+	}
+}
