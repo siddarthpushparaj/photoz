@@ -3,15 +3,20 @@ const auth = '563492ad6f917000010000010de73b521ec148999c6ebedee73d65c7';
 const gallery = document.querySelector('.gallery');
 const searchInput = document.querySelector('.search-input');
 const form = document.querySelector('.search-form');
+const moreBtn = document.querySelector('.more');
 let searchValue;
+let pageCount = 1;
+let currentSearch;
+let fetchLink;
 
 // Event Listeners
 searchInput.addEventListener('input', updateInput);
 form.addEventListener('submit', (e) => {
 	e.preventDefault();
-	clear();
+	currentSearch = searchValue;
 	searchPhotos(searchValue);
 });
+moreBtn.addEventListener('click', loadMore);
 
 // Functions
 async function fetchApi(url) {
@@ -32,7 +37,7 @@ function generatePhotos(data) {
 		galleryImg.innerHTML = `
         <div class="photo-info">
         <p>${photo.photographer}</p>
-        <a href="${photo.src.original} download> Download </a>"
+        <a href="${photo.src.original}" download target="_blank"> Download </a>
         </div>
         <img src="${photo.src.large}">
         `;
@@ -41,14 +46,15 @@ function generatePhotos(data) {
 }
 
 async function curatedPhotos() {
-	const data = await fetchApi('https://api.pexels.com/v1/curated?&page=1');
+	fetchLink = 'https://api.pexels.com/v1/curated?&page=1';
+	const data = await fetchApi(fetchLink);
 	generatePhotos(data);
 }
 
 async function searchPhotos(search) {
-	const data = await fetchApi(
-		`https://api.pexels.com/v1/search?query=${search}+query&page=1`,
-	);
+	clear();
+	fetchLink = `https://api.pexels.com/v1/search?query=${search}+query&page=1`;
+	const data = await fetchApi(fetchLink);
 	generatePhotos(data);
 }
 
@@ -59,6 +65,18 @@ function updateInput(e) {
 function clear() {
 	gallery.innerHTML = '';
 	searchInput.value = '';
+}
+
+async function loadMore() {
+	pageCount++;
+	if (currentSearch) {
+		fetchLink = `https://api.pexels.com/v1/search?query=${currentSearch}+query&page=${pageCount}`;
+	} else {
+		fetchLink = `https://api.pexels.com/v1/curated?&page=${pageCount}`;
+	}
+
+	const data = await fetchApi(fetchLink);
+	generatePhotos(data);
 }
 
 curatedPhotos();
