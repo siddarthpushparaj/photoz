@@ -119,6 +119,7 @@ header h1 {
 		width: 95%;
 		margin: 0 auto;
 	}
+
 	.search-form {
 		padding: 1rem;
 	}
@@ -132,6 +133,11 @@ header h1 {
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		grid-gap: 4rem;
 		width: 97%;
+		margin: 0 auto;
+	}
+
+	.gallery-img {
+		width: 100%;
 		margin: 0 auto;
 	}
 }
